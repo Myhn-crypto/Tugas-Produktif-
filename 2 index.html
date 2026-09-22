@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMKN 1 SUBANG</title>
+
+    <style>
+        /* Selector universal */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* Selector tag */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* Selector class */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background-color: #1e3a8a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Selector child */
+        .menu > li {
+            display: inline-block;
+            list-style: none;
+            margin-left: 25px;
+        }
+
+        /* Selector descendant */
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* Pseudo-class */
+        .menu a:hover,
+        .menu a.active {
+            color: #facc15;
+        }
+
+        /* Selector ID */
+        #home {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 80px 8%;
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+        }
+
+        .hero-text {
+            max-width: 550px;
+        }
+
+        .hero-text h1 {
+            font-size: 45px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* Selector atribut */
+        a[href="#kontak"] {
+            background-color: #f59e0b;
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+
+        a[href="#kontak"]:hover {
+            background-color: #d97706;
+            color: white;
+        }
+
+        .hero-image {
+            font-size: 140px;
+        }
+
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 35px;
+            font-size: 32px;
+        }
+
+        /* Pseudo-element */
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            margin: 10px auto;
+            background-color: #f59e0b;
+            border-radius: 5px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        .about {
+            background-color: white;
+            text-align: center;
+        }
+
+        .about p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 5px rgba(37, 99, 235, 0.4);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background-color: #1e3a8a;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        /* Tombol menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Tampilan tablet dan handphone */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 8%;
+                width: 200px;
+                padding: 15px;
+                background-color: #1e3a8a;
+                border-radius: 8px;
+            }
+
+            .menu.show {
+                display: block;
+            }
+
+            .menu > li {
+                display: block;
+                margin: 15px 0;
+            }
+
+            #home {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 35px;
+            }
+
+            .hero-image {
+                font-size: 90px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        header {
+    height: 90px;
+    background-color: #23428c;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 130px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.logo span {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav a.active {
+    color: #ffd000;
+}
+/* ================= HERO ================= */
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 70px 8% 70px 6%;
+
+    min-height: 650px;
+    gap: 70px;
+}
+
+/* TULISAN DI KIRI */
+.hero-text {
+    width: 52%;
+    max-width: 650px;
+}
+
+/* JUDUL */
+.hero-text h1 {
+    font-size: 58px;
+    color: #23428c;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+/* DESKRIPSI */
+.hero-text p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #172033;
+    margin-bottom: 25px;
+}
+
+/* TOMBOL */
+.hero-text .btn {
+    display: inline-block;
+
+    background-color: #f5a000;
+    color: white;
+
+    padding: 14px 25px;
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* GAMBAR DI KANAN */
+.hero-image {
+    width: 42%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+    /* FOTO KEGIATAN */
+
+.foto-kegiatan {
+    background: white;
+    padding: 70px 10%;
+    text-align: center;
+}
+
+.foto-kegiatan h2 {
+    color: #23428c;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.foto-kegiatan .keterangan {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto 40px;
+}
+
+.kumpulan-foto {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.kotak-foto {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.kotak-foto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.kotak-foto p {
+    padding: 15px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6fa;
+    color: #173b7a;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    height: 85px;
+    background-color: #24438e;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 70px;
+}
+
+
+/* LOGO SEKOLAH */
+
+.logo-sekolah {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-sekolah img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.logo-sekolah span {
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+
+/* NAVIGASI */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffc107;
+}
+
+nav .aktif {
+    background-color: #f5a000;
+    padding: 14px 20px;
+    border-radius: 9px;
+}
+
+
+/* ================= ISI ================= */
+
+main {
+    min-height: calc(100vh - 85px);
+    padding: 65px 8%;
+}
+
+
+/* CONTAINER CARD */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+/* CARD */
+
+.card {
+    background-color: white;
+    min-height: 200px;
+
+    border-radius: 10px;
+
+    padding: 25px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* LOGO BANK */
+
+.logo-bank {
+    height: 125px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-bank img {
+    max-width: 190px;
+    max-height: 90px;
+
+    object-fit: contain;
+}
+
+
+/* NAMA BANK */
+
+.card h3 {
+    font-size: 15px;
+    color: #173b7a;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    header {
+        padding: 0 30px;
+    }
+
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    header {
+        height: auto;
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* ================= DUDI ================= */
+
+.dudi {
+    background-color: #f4f6fa;
+    padding: 70px 8%;
+    text-align: center;
+}
+
+.dudi h2 {
+    color: #23428c;
+    font-size: 40px;
+    margin-bottom: 45px;
+}
+
+/* 4 CARD DALAM 1 BARIS */
+.dudi-container {
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+/* CARD DUDI */
+.dudi-card {
+    background-color: white;
+    height: 200px;
+
+    border-radius: 12px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* LOGO BANK */
+.logo-bank {
+    width: 100%;
+    height: 130px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-bank img {
+    max-width: 170px;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+/* NAMA BANK */
+.dudi-card h3 {
+    width: 100%;
+    text-align: left;
+
+    font-size: 15px;
+    color: #173b7a;
+    margin: 0;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .dudi-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dudi-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <header>
+    <div class="logo">
+        <img src="c:\Users\LENOVO\Downloads\Logo smea.webp" alt="Logo SMKN 1 Subang">
+        <span>SMKN 1 SUBANG</span>
+    </div>
+
+    <nav>
+    <a href="#beranda" class="active">Beranda</a>
+    <a href="#kompetensi-dasar">Kompetensi Dasar</a>
+    <a href="#foto-kegiatan">Foto Kegiatan</a>
+    <a href="#dudi">DUDI</a>
+    </nav>
+</header>
+
+    <!-- Bagian Beranda -->
+    <main>
+       <main>
+    <section id="beranda" class="hero">
+
+    <div class="hero-text">
+        <h1>Akuntansi & Keuangan<br>Lembaga</h1>
+
+        <p>
+            Akuntansi adalah proses mengidentifikasi, mengukur, mencatat,
+            mengolah, dan menyajikan data keuangan suatu entitas atau
+            organisasi menjadi informasi yang berguna bagi pihak internal
+            maupun eksternal untuk pengambilan keputusan.
+        </p>
+
+        <a href="#" class="btn">Hubungi Kami</a>
+    </div>
+
+    <div class="hero-image">
+        <img src="c:\Users\LENOVO\Downloads\ak.jpeg" alt="Logo Jurusan Akuntansi">
+    </div>
+
+</section>
+
+        <!-- Bagian Fitur -->
+        <section id="kompetensi-dasar">
+            <h2 class="section-title">Kompetensi Dasar</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">🤝</div>
+                    <h3>Etika Profesi</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Aplikasi Pengolah Angka / Spreadsheet</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📚</div>
+                    <h3>Akuntansi Dasar</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🏦</div>
+                    <h3>Perbankan Dasar</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📈</div>
+                    <h3>Praktikum Akuntansi Perusahaan Jasa, Dagang, dan Manufaktur</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📊</div>
+                    <h3>Praktikum Akuntansi Lembaga / Instansi Pemerintah</h3>
+                </div>
+
+                 <div class="card">
+                    <div class="icon">💰</div>
+                    <h3>Akuntansi Keuangan</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">💻</div>
+                    <h3>Komputer Akuntansi</h3>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🧮</div>
+                    <h3>Administrasi Pajak</h3>
+                </div>
+                
+                <div class="card">
+                    <div class="icon">📋</div>
+                    <h3>Produk Kreatif dan Kewirausahaan</h3>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Bagian Tentang -->
+    <section id="foto-kegiatan" class="foto-kegiatan">
+
+    <h2>Foto Kegiatan</h2>
+
+    <p class="keterangan">
+        Berikut adalah beberapa foto kegiatan yang dilakukan oleh siswa dan siswi
+        di SMKN 1 SUBANG, khususnya dalam bidang Akuntansi dan Keuangan Lembaga.
+    </p>
+
+    <div class="kumpulan-foto">
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\kegiatan akl.jpg" alt="Kegiatan 1">
+            <p> Kegiatan sosialisasi bidang Akuntansi dan Profesi Akuntan
+        bersama siswa-siswi jurusan Akuntansi.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 22.png" alt="Kegiatan 2">
+            <p>Kegiatan praktik dan pembelajaran siswa dalam bidang
+        Akuntansi dan Keuangan Lembaga.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 33.jpeg" alt="Kegiatan 3">
+            <p>Kegiatan siswa sedang mengerjakan tugas dan mempelajari
+        materi Akuntansi menggunakan komputer.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 4.jpeg" alt="Kegiatan 4">
+            <p> Kegiatan kebersamaan siswa dan guru dalam lingkungan
+        sekolah.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 5.jpg" alt="Kegiatan 5">
+            <p> Kegiatan praktik Akuntansi menggunakan kalkulator
+        dan dokumen keuangan.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 6.jpg" alt="Kegiatan 6">
+            <p>Kegiatan siswa mengerjakan latihan dan mencatat
+        materi pembelajaran Akuntansi..</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 7.jpg" alt="Kegiatan 7">
+            <p>Kegiatan siswa mempelajari dan mengolah data keuangan
+        menggunakan spreadsheet.</p>
+        </div>
+
+        <div class="kotak-foto">
+            <img src="c:\Users\LENOVO\Downloads\foto kegiatan 8.jpeg" alt="Kegiatan 8">
+            <p>Kegiatan siswa melakukan praktik komputer dan berdiskusi
+        dalam proses pembelajaran.</p>
+        </div>
+
+
+    </div>
+
+<br></br>
+
+<!-- DUDI -->
+    <section id="dudi" class="dudi">
+
+    <h2>Dunia Usaha / Dunia Industri</h2>
+
+    <div class="dudi-container">
+
+        <!-- CARD 1 -->
+        <div class="dudi-card">
+            <h3>MITRA USAHA UMKM</h3>
+            <div class="logo-bank">
+                <img src="https://bprku.com/wp-content/uploads/2020/12/logo-KANTOR-2022.png" alt="BPRKU">
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="dudi-card">
+            <h3>Bank bjb</h3>
+            <div class="logo-bank">
+                <img src="https://png.pngtree.com/png-clipart/20221227/original/pngtree-bjb-bank-logo-png-image_8812672.png" alt="Bank bjb">
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="dudi-card">
+            <h3>Bank BRI</h3>
+            <div class="logo-bank">
+                <img src="https://e7.pngegg.com/pngimages/965/702/png-clipart-logo-bank-rakyat-indonesia-graphics-brand-product-design-blue-cdr.png" alt="Bank BRI">
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="dudi-card">
+            <h3>Pegadaian</h3>
+            <div class="logo-bank">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Pegadaian_logo_%282013%29.svg/960px-Pegadaian_logo_%282013%29.svg.png" alt="Pegadaian">
+            </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="dudi-card">
+            <h3>Bank BTN</h3>
+            <div class="logo-bank">
+                <img src="https://images.seeklogo.com/logo-png/47/2/bank-btn-logo-png_seeklogo-472281.png" alt="Bank BTN">
+            </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="dudi-card">
+            <h3>Bank DJP</h3>
+            <div class="logo-bank">
+                <img src="https://zonalogo.com/assets/logo-djp.webp" alt="Bank DJP">
+            </div>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="dudi-card">
+            <h3>Bank Tutur Ganda</h3>
+            <div class="logo-bank">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjn2v9ErtsLLLuCRNOOjp2c8isXfXLieApFfMhRhCR9gfU6BQxSTEQN1jPHIOj_Big6YMbUwF6Qc0HXtRFftKjgdnRgOLb7DcjNVlHqv-GE_6lQs4tBsPPioOLxp9ncChC10j9RFnsEaiQTT_o4-w77WCCS63FsuklXxQrOKTkUqsS7hZwa3hPJ9qDj9A/s4000/BPR%20TAHUAN%20GANDA.png" alt="Bank Tutur Ganda">
+            </div>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="dudi-card">
+            <h3>Bank BSI</h3>
+            <div class="logo-bank">
+                <img src="https://iconlogovector.com/uploads/images/2023/11/lg-65571292f0011-bsi.png" alt="Bank BSI">
+            </div>
+        </div>
+
+    </div>
+
+</section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SMKN 1 SUBANG, JURUSAN AKL.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector("#menuToggle");
+        const menu = document.querySelector("#menu");
+
+        menuToggle.addEventListener("click", function () {
+            menu.classList.toggle("show");
+        });
+
+        const menuLinks = document.querySelectorAll(".menu a");
+
+        menuLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                menuLinks.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                link.classList.add("active");
+                menu.classList.remove("show");
+            });
+        });
+    </script>
+
+</body>
+</html>
